@@ -1,19 +1,15 @@
-# Efficient Multi-Task Learning via Selective Behavior Sharing
+# QMP: Q-switch Mixture of Policies for Multi-Task Behavior Sharing
 ## Accepted to ICLR 2025
 
-[[Project Website]](https://sites.google.com/view/qmp-mtrl) [[Paper]](https://arxiv.org/abs/2302.00671) [[OpenReview]](https://openreview.net/forum?id=aUZEeb2yvK&referrer=%5BAuthor%20Console%5D(%2Fgroup%3Fid%3DICLR.cc%2F2025%2FConference%2FAuthors%23your-submissions))
+[[Project Website]](https://qmp-mtrl.github.io/) [[Paper]](https://arxiv.org/abs/2302.00671) [[OpenReview]](https://openreview.net/forum?id=aUZEeb2yvK)
 
-Grace Zhang<sup>1</sup>, Ayush Jain<sup>1</sup>, Injune Hwang<sup>2</sup>, Shao-Hua Sun<sup>3</sup>, Joseph J. Lim<sup>2</sup>
+[Grace Zhang](https://gracehzhang.github.io/)\*<sup>1</sup>, [Ayush Jain](https://ayushj240.github.io/)\*<sup>1</sup>, [Injune Hwang]()<sup>2</sup>, [Shao-Hua Sun](https://shaohua0116.github.io/)<sup>3</sup>, [Joseph J. Lim](https://clvrai.com/web_lim/)<sup>2</sup>
 
 <sup>1</sup>University of Southern California <sup>2</sup>KAIST <sup>3</sup>National Taiwan University
 
-This is the official implementation of Efficient Multi-Task Learning via Selective Behavior Sharing. 
+This is the official PyTorch implementation of ICLR 2025 paper **"QMP: Q-switch Mixture of Policies for Multi-Task Behavior Sharing"**. 
 
-We propose Q-switch Mixture of Policies (QMP), a simple multi-task RL method that selectively shares behaviors 
-between tasks for more sample efficient MTRL. The ability to leverage shared behaviors between tasks is critical for sample efficient multi-task reinforcement learning (MTRL). Prior approaches based on policy distillation share behaviors uniformly across tasks, which is fundamentally limited when 
-tasks have conflicting behaviors because no one optimal policy exists. Our key insight is that, we can instead share behavioral policies for off-policy data collection which can be helpful 
-even when the optimal behaviors differ and does not require changing the training objective, making it easily compatible with other MTRL methods. Furthermore, we can identify shareable behaviors through the Q-switch, which uses the task's learned Q-function to evaluate action proposals from each policy. To this end, we propose a novel MTRL method, Q-switch Mixture of policies (QMP), that learns to selectively shares
-behavior between tasks by using a mixture of policies gated by the Q-switch to gather training data.  We demonstrate that QMP is compatible with and provides complementary gains with many other MTRL methods.
+Abstract: QMP is a multi-task reinforcement learning approach that shares behaviors between tasks using a **mixture of policies** for off-policy data collection. We show that using the Q-function as a switch for this mixture is guaranteed to improve sample efficiency. The **Q-switch** selects which policy among the mixture that maximizes the current task's Q-value for the current state. This works because other policies might have already learned overlapping behaviors that the current task's policy has not learned. QMP's behavior sharing shows **complementary** gains over common approaches like parameter sharing and data sharing.
 
 <p align="center">
     <img src="model.png" width="800px">
@@ -37,7 +33,7 @@ To install python dependencies.
    ```
 
 ## Implementing QMP
-Our implementation of QMP is based on top of the garage RL codebase [https://github.com/rlworkgroup/garage].  If you would
+Our implementation of QMP is based on top of the garage RL codebase [https://github.com/rlworkgroup/garage](https://github.com/rlworkgroup/garage).  If you would
 like to re-implement QMP in your own codebase, it is fairly simple, as we only replace the data collection policy for each 
 task, denoted $\pi_i$, with our mixture policy $\pi_i^{mix}$.  We highlight the specific changes we made in this codebase 
 below, to aid in re-implementing QMP in a different codebase.
@@ -91,6 +87,7 @@ hyperparameters (`unsupervised_quantile`, `lr`, `hidden_sizes`) according to the
 </p>
 
 ## Citation
+Please consider citing our work if you find it useful. Reach out to us for any questions!
 ```
 @inproceedings{
 zhang2025qmp,
